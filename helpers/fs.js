@@ -10,7 +10,7 @@ const fileIsExists = async name => {
   }
 };
 
-const appendFile = (name, content) => fs.promises.appendFile(name, content);
+const writeFile = (name, content) => fs.promises.writeFile(name, content);
 const readFile = name => fs.promises.readFile(name, 'utf8');
 
-export { fileIsExists, appendFile, readFile };
+export { fileIsExists, writeFile, readFile };

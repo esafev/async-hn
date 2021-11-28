@@ -1,27 +1,19 @@
-import { fileIsExists, appendFile, readFile } from './helpers/fs';
-import { merge, stringify } from './helpers/utils';
-import { get } from './helpers/fetch';
+import { createServer } from 'http';
+import { fetchBestStories, getBestStories } from './handlers/articles';
 
-const hnTopUrl = 'https://hacker-news.firebaseio.com/v0/beststories.json?print=pretty';
+const handler = (req, res) => {
+  if (req.url === '/') {
+    res.end('Hello!');
+  }
 
-const fileName = 'ids.json';
+  if (req.url === '/fetch') {
+    fetchBestStories(res);
+  }
 
-const createAndAppendToFile = data => {
-  appendFile(fileName, stringify(data));
-};
+  if (req.url === '/get') {
+    getBestStories(res);
+  }
+}
 
-const appendToFile = async data => {
-  const currentData = await readFile(fileName);
-
-  appendFile(fileName, stringify(merge(currentData, uniqueData)));
-};
-
-const fetchBestStories = async () => {
-  const data = await get(hnTopUrl);
-
-  await fileIsExists(fileName)
-    ? appendToFile(data)
-    : createAndAppendToFile(data);
-};
-
-fetchBestStories();
+const server = createServer(handler);
+server.listen(3000);
