@@ -1,0 +1,13 @@
+{
+  "name": "async-hn",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "HackerNews everyweek scheduler",
+  "main": "index.js",
+  "author": "artmare@me.com",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "node --experimental-modules --es-module-specifier-resolution=node app.js"
+  }
+}
